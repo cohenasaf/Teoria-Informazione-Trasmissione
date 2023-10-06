@@ -9,3 +9,7 @@
 #pagebreak()
 
 // Appunti
+
+// Lezione 06/10/2023
+
+#include "2023-10-06.typ"
