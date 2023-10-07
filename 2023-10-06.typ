@@ -1,5 +1,7 @@
 #import "@preview/tablex:0.0.5": tablex
 
+#import emoji: suit
+
 = Introduzione
 
 == Storia
@@ -108,3 +110,61 @@ In un *canale ideale* la ridondanza è pari a 0, mentre per canali con rumore vi
 Ogni riga $i$ rappresenta una distribuzione di probabilità che definisce la probabilità che, spedito il carattere $i$, si ottenga uno dei valori $j$ presenti nelle colonne.
 
 Se il canale è ideale la matrice risultante è la matrice identità.
+
+#pagebreak()
+
+= Codifica della sorgente
+
+Andiamo a modellare e formalizzare il primo problema con un modello statistico, utilizzando però un approccio _semplice e bello_: assumiamo che le regole di compressione non siano dipendenti dalle proprietà di un dato linguaggio.
+
+Ad esempio, data la lettera "H" nella lingua italiana, ho più probabilità che esca la lettera "I" piuttosto che la lettera "Z" come successiva di "H", ma questa probabilità nel nostro modello non viene considerata.
+
+Il codice _zip_ invece prende in considerazione questo tipo di distribuzione statistica dipendente, e infatti è molto più complicato.
+
+== Introduzione matematica
+
+Introduciamo una serie di "personaggi" che saranno utili nella nostra modellazione:
+- insieme $Chi space arrow.long.r.bar.double space$ insieme finito di simboli che compongono i messaggi generati dalla sorgente;
+- messaggio $overline(x) space arrow.long.r.bar.double space$ sequenza di $n$ simboli sorgente; in modo formale, $ overline(x) = (x_1, dots, x_n) in Chi^n, text(" con") x_i in Chi space forall i in {1, dots, n}; $
+- base $D$;
+- insieme ${0, dots, D-1} space arrow.long.r.bar.double space$ insieme finito dei simboli che compongono il codice scelto;
+- insieme ${0, dots, D-1}^+ space arrow.long.r.bar.double space$ insieme di tutte le possibili parole di codice esprimibili tramite una sequenza non vuota di simboli di codice; in modo formale $ {0, dots, D-1} = union.big_(n-1)^(infinity) {0, dots, D-1}^n . $ Un altro nome per le parole di codice è sequenze $D$-arie;
+- funzione $c space arrow.long.r.bar.double space$ funzione (nel nostro caso _codice_) che mappa ogni simbolo $x in Chi$ in una parola di codice, ovvero una funzione del tipo $ c : Chi arrow.long.r {0, dots, D-1}^+. $ Questa funzione va ad effettuare un *mapping indipendente*, ovvero tutto viene codificato assumendo che non esistano relazioni tra due o più estrazioni consecutive.
+
+== Prima applicazione
+
+Vogliamo trasmettere sul canale i semi delle carte da poker utilizzando il codice binario.
+
+Andiamo a definire:
+- $Chi = {suit.heart, suit.diamond, suit.club, suit.spade}$ insieme dei simboli sorgente;
+- $c : Chi arrow.long.r {0,1}^+$ funzione di codifica;
+- $c(suit.heart) = 0$;
+- $c(suit.diamond) = 01$;
+- $c(suit.club) = 010$;
+- $c(suit.spade) = 10$.
+
+La codifica proposta è sicuramente plausibile, ma ha due punti deboli:
+- ambiguità: se ricevo "010" ho come possibili traduzioni $suit.club$, $suit.heart suit.spade$ e $suit.diamond suit.heart$;
+- pessima compressione: usiamo tre simboli di codice per codificare $suit.club$ e solo uno per codificare $suit.heart$.
+
+Quest'ultimo punto debole viene risolto prima introducendo $l_c (x)$ come lunghezza della parola di codice associata ad $x in Chi$, e poi minimizzando la media di tutte le lunghezze al variare di $x in Chi$.
+
+== Modello statistico
+
+Per completare il modello abbiamo bisogno di un'altra informazione: la *distribuzione di probabilità* che definisce la probabilità con la quale i simboli sorgente sono emessi.
+
+Definiamo quindi la sorgente come la coppia $angle.l Chi, p angle.r$, dove $p$ rappresenta la probabilità prima descritta.
+
+Aggiungiamo qualche "protagonista" a quelli già prima introdotti:
+- funzione $P_n space arrow.long.r.bar.double space$ non siamo molto interessati ai singoli simboli sorgente, ma vogliamo lavorare con i messaggi, quindi definiamo $ P_n (overline(x)) = P_n (x_1, dots, x_n) = product_(i=1)^n p(x_i). $ Possiamo applicare la produttoria perché Shannon assume che ci sia _indipendenza_ tra più estrazioni di simboli sorgente;
+- variabile aleatoria $XX space arrow.long.r.bar.double space$ variabile aleatoria $XX : Chi arrow.long.r RR$ che rappresenta un'estrazione di un simbolo sorgente;
+- insieme $DD space arrow.long.r.bar.double space$ già definito in precedenza come ${0, dots, D-1}$;
+- funzione $c space arrow.long.r.bar.double space$ già definita in precedenza, ma che riscriviamo come $c : Chi arrow.long.r DD^+$.
+
+Con questo modello, fissando $Chi$ insieme dei simboli sorgente e $D$ base, vogliamo trovare un codice $c : Chi arrow.long.r DD^+$ che realizzi la migliore compressione, ovvero che vada a minimizzare il _valore atteso_ della lunghezza delle parole di codice, definito come $EE[l_c] = limits(sum)_(x in XX) l_c (x) p(x)$.
+
+La strategia che viene utilizzata è quella dell'alfabeto Morse: utilizziamo parole di codice corte per i simboli che sono generati spesso dalla sorgente, e parole di codice lunghe per i simboli che sono generatori raramente dalla sorgente.
+
+Il primo problema che incontriamo è quello di evitare la _codifica banale_: se usassi il codice $c(x) = 0, space forall x in Chi$ avrei sì una codifica di lunghezza minima ma sarebbe impossibile da decodificare.
+
+Dobbiamo imporre che il codice $c$ sia *iniettivo*, o _non-singolare_.
