@@ -3,3 +3,6 @@ dispense/
 
 # Notebook per grafici
 notebook.ipynb
+
+# Spell checker
+.vscode/
