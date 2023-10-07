@@ -32,13 +32,13 @@ In poche parole, dato un messaggio da comprimere:
 
 == Obiettivi di Shannon
 
-Gli obiettivi che Shanno vuole perseguire sono due:
+Gli obiettivi che Shannon vuole perseguire sono due:
 - *massimizzare* l'informazione trasmessa _ad ogni utilizzo del canale_;
 - *minimizzare* il numero di errori di trasmissione dovuti alla presenza del rumore nel canale.
 
 La parte "_ad ogni utilizzo del canale_" viene inserita per dire che, ogni volta che si accede al canale, deve essere utilizzato tutto, mentre senza questa parte una sorgente potrebbe mandare l'1% del messaggio ad ogni accesso al canale, mandandolo sì tutto ma senza sfruttare a pieno la banda.
 
-Shanno risolverà questi due problemi con due importantissimi teoremi:
+Shannon risolverà questi due problemi con due importantissimi teoremi:
 - *$I$° teorema di Shannon*, che riguarda la _source coding_, ovvero la ricerca di un codice per rappresentare i messaggi della sorgente che massimizzi l'informazione spedita sul canale, ovvero massimizzi la sua *compressione*;
 - *$\I\I$° teorema di Shannon*, che riguarda la _channel coding_, ovvero la ricerca di un codice per rappresentare i messaggi della sorgente che minimizzi gli errori di trasmissione dovuti alla presenza del rumore nel canale.
 
