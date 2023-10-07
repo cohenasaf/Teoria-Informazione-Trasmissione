@@ -128,7 +128,7 @@ Introduciamo una serie di "personaggi" che saranno utili nella nostra modellazio
 - messaggio $overline(x) space arrow.long.r.bar.double space$ sequenza di $n$ simboli sorgente; in modo formale, $ overline(x) = (x_1, dots, x_n) in Chi^n, text(" con") x_i in Chi space forall i in {1, dots, n}; $
 - base $D$;
 - insieme ${0, dots, D-1} space arrow.long.r.bar.double space$ insieme finito dei simboli che compongono il codice scelto;
-- insieme ${0, dots, D-1}^+ space arrow.long.r.bar.double space$ insieme di tutte le possibili parole di codice esprimibili tramite una sequenza non vuota di simboli di codice; in modo formale $ {0, dots, D-1} = union.big_(n-1)^(infinity) {0, dots, D-1}^n . $ Un altro nome per le parole di codice è sequenze $D$-arie;
+- insieme ${0, dots, D-1}^+ space arrow.long.r.bar.double space$ insieme di tutte le possibili parole di codice esprimibili tramite una sequenza non vuota di simboli di codice; in modo formale $ {0, dots, D-1}^+ = union.big_(n-1)^(infinity) {0, dots, D-1}^n . $ Un altro nome per le parole di codice è sequenze $D$-arie;
 - funzione $c space arrow.long.r.bar.double space$ funzione (nel nostro caso _codice_) che mappa ogni simbolo $x in Chi$ in una parola di codice, ovvero una funzione del tipo $ c : Chi arrow.long.r {0, dots, D-1}^+. $ Questa funzione va ad effettuare un *mapping indipendente*, ovvero tutto viene codificato assumendo che non esistano relazioni tra due o più estrazioni consecutive.
 
 == Prima applicazione
