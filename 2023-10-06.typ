@@ -6,7 +6,7 @@
 
 == Storia
 
-La teoria dell'informazione nasce nel 1948 grazie a *Claude Shannon* (1916-2001), un impiegato alla "Telecom" americana al quale sono stati commissionati due lavori: data una comunicazione su filo di rame, si voleva sfruttare tutta la capacità del canale, ma al tempo stesso coreggere gli errori di trasmissione dovuti al rumore presente.
+La teoria dell'informazione nasce nel 1948 grazie a *Claude Shannon* (1916-2001), un impiegato alla "Telecom" americana al quale sono stati commissionati due lavori: data una comunicazione su filo di rame, si voleva sfruttare tutta la capacità del canale, ma al tempo stesso correggere gli errori di trasmissione dovuti al rumore presente.
 
 Nel 1948 infatti viene pubblicato l'articolo "_A Mathematical Theory of Communication_" da parte di Bell Labs, dove Shannon pone le basi della teoria dell'informazione.
 
@@ -82,9 +82,9 @@ Quello che facciamo è concentrare l'informazione, rendendola *equamente distrib
 
 == Secondo teorema di Shannon
 
-Il secondo teorema di Shannon è quello più rognoso, perchè si occupa della _channel coding_, ovvero di una codifica che permetta di minimizzare l'informazione persa durante la trasmissione.
+Il secondo teorema di Shannon è quello più rognoso, perché si occupa della _channel coding_, ovvero di una codifica che permetta di minimizzare l'informazione persa durante la trasmissione.
 
-Vogliamo questo perchè l'informazione che passa sul canale è compressa, quindi qualsiasi bit perso ci fa perdere molte informazioni, non essendoci ridondanza.
+Vogliamo questo perché l'informazione che passa sul canale è compressa, quindi qualsiasi bit perso ci fa perdere molte informazioni, non essendoci ridondanza.
 
 Quello che viene fatto quindi è aggiungere *ridondanza*, ovvero più copie delle informazioni da spedire così che, anche perdendo un bit di informazione, lo si possa recuperare usando una delle copie inviate.
 
